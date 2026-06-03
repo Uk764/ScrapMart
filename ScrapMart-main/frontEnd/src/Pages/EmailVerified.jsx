@@ -14,7 +14,7 @@ const EmailVerificationStatus = () => {
       const verify=async()=>{
       const response=await axios.get(`${backendUrl}/user/verify?token=${token}`)
       console.log(response.data.data)
-      if(!response.data.succes){
+      if(!response.data.success){
         setVerified(false)
       }
       else{

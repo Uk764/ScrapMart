@@ -5,6 +5,7 @@ const userRouter=express.Router()
 
 userRouter.post('/Registor',Registor)
 userRouter.get('/verify',otpVerification)
+userRouter.post('/verify',otpVerification)
 userRouter.post('/setprofile/:email',setProfile)
 userRouter.post('/login',login)
 userRouter.get('/profile',AuthUser,profileData)

@@ -19,23 +19,24 @@ const SetProfile = () => {
   const submitHandler=async()=>{
     try{
       const response=await axios.post(`${backendUrl}/user/setprofile/${email}`,{username,password,role,phone})
-      console.log(response.data.loginToken)
-      setToken(response.data.loginToken)
-      console.log(response.data.role)
-      
-      
-      localStorage.setItem('token',response.data.loginToken)
-      setUserRole(response.data.role)
-      console.log(userRole)
-      
-      if(response.data.role ==='dealer'){
-        navigate('/allscrap')
+      if (response.data.success) {
+        console.log(response.data.loginToken)
+        setToken(response.data.loginToken)
+        console.log(response.data.role)
+        
+        localStorage.setItem('token',response.data.loginToken)
+        setUserRole(response.data.role)
+        console.log(userRole)
+        
+        if(response.data.role ==='dealer'){
+          navigate('/allscrap')
+        }
+        else{
+          navigate('/CoustomerDashbord')
+        }
+      } else {
+        toast.error(response.data.msg || "Failed to set profile details")
       }
-      else{
-        navigate('/CoustomerDashbord')
-      }
-      
-      
     }
     catch(e){
       toast.error(e.message)
